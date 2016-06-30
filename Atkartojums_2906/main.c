@@ -15,7 +15,6 @@ typedef struct {
     char* vards;
     char* uzvards;
     int klase;
-
     Prieksmets* prieksmeti;
 
 } Skolens;
@@ -24,18 +23,26 @@ Skolens newSkolens(char* vards, char* uzvards, int klase);
 Prieksmets newPrieksmets(char* nosaukums, int stunduSkaits, int atzimjuSkaits);
 Prieksmets newPrieksmets2(char* nosaukums, int stunduSkaits, int atzimjuSkaits, int* atzimes, int* apmeklejums);
 
+void randomAtzimes(Skolens sk);
+
 int getAtzime(Skolens sk, char* nosaukums, int i);
 void setAtzime(Skolens sk, char* nosaukums, int i, int atzime);
 
 int main(int argc, char** argv) {
+    srand(time(NULL));
+    Skolens skoleni[3];
+    skoleni[0] = newSkolens("Edgars", "Garsneks", 3);
+    skoleni[1] = newSkolens("Bob", "Bobito", 2);
+    skoleni[2] = newSkolens("Peteris", "Lauritis", 3);
 
-    Skolens sk = newSkolens("Edgars", "Garsneks", 3);
-    Skolens sk1 = newSkolens("Peteris", "Nazis", 2);
-    sk.prieksmeti[2].apmeklejums[0] = 1;
-    sk.prieksmeti[2].atzimes[1] = 7;
-    
-    setAtzime(sk, "Sports", 1, 10);
-    printf("%s Nr.%d=%d", sk.prieksmeti[2].nosaukums, 1, getAtzime(sk, "Sports", 1));
+    for (int i = 0; i < 3; i++) {
+        randomAtzimes(skoleni[i]);
+    }
+    printf("%d", skoleni[0].prieksmeti[0].apmeklejums[0]);
+
+
+
+
 
     return EXIT_SUCCESS;
 }
@@ -48,9 +55,9 @@ Skolens newSkolens(char* vards, char* uzvards, int klase) {
     sk.uzvards = uzvards;
     sk.klase = klase;
 
-    prieksmeti[0] = newPrieksmets("Matematika", 10, 3);
-    prieksmeti[1] = newPrieksmets("Fizika", 20, 4);
-    prieksmeti[2] = newPrieksmets("Sports", 15, 10);
+    prieksmeti[0] = newPrieksmets("Matematika", 3, 4);
+    prieksmeti[1] = newPrieksmets("Fizika", 3, 4);
+    prieksmeti[2] = newPrieksmets("Sports", 3, 4);
 
     sk.prieksmeti = prieksmeti;
     return sk;
@@ -104,4 +111,22 @@ int getAtzime(Skolens sk, char* nosaukums, int i) {
         }
     }
     return 0;
+}
+
+void randomAtzimes(Skolens sk) {
+    for (int pk = 0; pk < 3; pk++) {
+        for (int a = 0; a < sk.prieksmeti[pk].atzimjuSkaits; a++) {
+            sk.prieksmeti[pk].atzimes[a] = rand() % 10 + 1;
+        }
+
+        for (int n = 0; n < sk.prieksmeti[pk].stunduSkaits; n++) {
+            //sk.prieksmeti[pk].apmeklejums[n] = rand() % 2; //50:50
+            if (rand() % 100 <= 70) { // 70:30
+                sk.prieksmeti[pk].apmeklejums[0] = 1;
+            } else {
+                //   sk.prieksmeti[pk].apmeklejums[n] = 0;
+            }
+        }
+
+    }
 }
