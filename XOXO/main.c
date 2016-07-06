@@ -62,7 +62,6 @@ int main(int argc, char** argv) {
         case LOST:
             printf("Dators uzvareja!\n");
             break;
-
         default:
             printf("Neizskirts!\n");
             break;
@@ -79,31 +78,67 @@ void lietotajaGajiens(char laukums[][3]) {
 
     switch (pozicija) {
         case 7:
-            laukums[0][0] = 'X';
+            if (laukums[0][0] == ' ') {
+                laukums[0][0] = 'X';
+            } else {
+                lietotajaGajiens(laukums);
+            }
             break;
         case 8:
-            laukums[0][1] = 'X';
+            if (laukums[0][1] == ' ') {
+                laukums[0][1] = 'X';
+            } else {
+                lietotajaGajiens(laukums);
+            }
             break;
         case 9:
-            laukums[0][2] = 'X';
+            if (laukums[0][2] == ' ') {
+                laukums[0][2] = 'X';
+            } else {
+                lietotajaGajiens(laukums);
+            }
             break;
         case 4:
-            laukums[1][0] = 'X';
+            if (laukums[1][0] == ' ') {
+                laukums[1][0] = 'X';
+            } else {
+                lietotajaGajiens(laukums);
+            }
             break;
         case 5:
-            laukums[1][1] = 'X';
+            if (laukums[1][1] == ' ') {
+                laukums[1][1] = 'X';
+            } else {
+                lietotajaGajiens(laukums);
+            }
             break;
         case 6:
-            laukums[1][2] = 'X';
+            if (laukums[1][2] == ' ') {
+                laukums[1][2] = 'X';
+            } else {
+                lietotajaGajiens(laukums);
+            }
             break;
         case 1:
-            laukums[2][0] = 'X';
+            if (laukums[2][0] == ' ') {
+                laukums[2][0] = 'X';
+            } else {
+                lietotajaGajiens(laukums);
+            }
             break;
         case 2:
-            laukums[2][1] = 'X';
+            if (laukums[2][1] == ' ') {
+                laukums[2][1] = 'X';
+            } else {
+                lietotajaGajiens(laukums);
+            }
             break;
         case 3:
-            laukums[2][2] = 'X';
+            if (laukums[2][2] == ' ') {
+                laukums[2][2] = 'X';
+            } else {
+                lietotajaGajiens(laukums);
+            }
             break;
     }
 
