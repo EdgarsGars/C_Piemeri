@@ -25,7 +25,7 @@ void datoraGajiens(char laukums[][3]);
 int parbaudit(char laukums[][3]);
 
 int main(int argc, char** argv) {
-
+    srand(time(NULL));
     char laukums[3][3];
 
     for (int r = 0; r < 3; r++) {
@@ -160,13 +160,21 @@ int parbaudit(char laukums[][3]) {
         char gajiens = simboli[i];
 
         //Veiksim parbaudes
-        if (laukums[0][0] == gajiens && laukums[0][1] == gajiens && laukums[0][2] == gajiens) {
-            return (gajiens == 'X') ? WON : LOST;
-            //            if (gajiens == 'X') {
-            //                return WON;
-            //            } else {
-            //                return LOST;
-            //            }
+        //            if (gajiens == 'X') {
+        //                return WON;
+        //            } else {
+        //                return LOST;
+        //            }
+        //
+        for (int n = 0; n < 3; n++) {
+            //Parbudam rindas
+            if (laukums[n][0] == gajiens && laukums[n][1] == gajiens && laukums[n][2] == gajiens) {
+                return (gajiens == 'X') ? WON : LOST;
+            }
+
+            if (laukums[0][n] == gajiens && laukums[1][n] == gajiens && laukums[2][n] == gajiens) {
+                return (gajiens == 'X') ? WON : LOST;
+            }
         }
 
     }
