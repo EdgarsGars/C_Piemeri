@@ -23,11 +23,12 @@
 void lietotajaGajiens(char laukums[][3]);
 void datoraGajiens(char laukums[][3]);
 int parbaudit(char laukums[][3]);
+void printLaukums(char laukums[][3]);
 
 int main(int argc, char** argv) {
     srand(time(NULL));
     char laukums[3][3];
-
+    int soli = 0;
     for (int r = 0; r < 3; r++) {
         for (int k = 0; k < 3; k++) {
             laukums[r][k] = ' ';
@@ -36,23 +37,23 @@ int main(int argc, char** argv) {
 
 
     while (1) {
-        printf("-+-+-\n");
-        for (int r = 0; r < 3; r++) {
-            printf("%c|%c|%c\n", laukums[r][0], laukums[r][1], laukums[r][2]);
-            printf("-+-+-\n");
-        }
+        printLaukums(laukums);
 
         lietotajaGajiens(laukums);
-        if (parbaudit(laukums) != CONTINUE) {
+        soli++;
+        if (parbaudit(laukums) != CONTINUE || soli == 9) {
             break;
         }
 
         datoraGajiens(laukums);
-        if (parbaudit(laukums) != CONTINUE) {
+        soli++;
+        if (parbaudit(laukums) != CONTINUE || soli == 9) {
             break;
         }
         printf("\n\n");
     }
+
+    printLaukums(laukums);
 
 
     switch (parbaudit(laukums)) {
@@ -140,6 +141,8 @@ void lietotajaGajiens(char laukums[][3]) {
                 lietotajaGajiens(laukums);
             }
             break;
+        default:
+            lietotajaGajiens(laukums);
     }
 
 }
@@ -171,16 +174,32 @@ int parbaudit(char laukums[][3]) {
             if (laukums[n][0] == gajiens && laukums[n][1] == gajiens && laukums[n][2] == gajiens) {
                 return (gajiens == 'X') ? WON : LOST;
             }
-
+            //Parbaudam kolonas
             if (laukums[0][n] == gajiens && laukums[1][n] == gajiens && laukums[2][n] == gajiens) {
                 return (gajiens == 'X') ? WON : LOST;
             }
         }
 
+        //Diogonale #1
+        if (laukums[0][0] == gajiens && laukums[1][1] == gajiens && laukums[2][2] == gajiens) {
+            return (gajiens == 'X') ? WON : LOST;
+        }
+        //Diogonale #2
+        if (laukums[0][2] == gajiens && laukums[1][1] == gajiens && laukums[2][0] == gajiens) {
+            return (gajiens == 'X') ? WON : LOST;
+        }
+
+
     }
     //Default continue
     return CONTINUE;
 
+}
 
-
+void printLaukums(char laukums[][3]) {
+    printf("-+-+-\n");
+    for (int r = 0; r < 3; r++) {
+        printf("%c|%c|%c\n", laukums[r][0], laukums[r][1], laukums[r][2]);
+        printf("-+-+-\n");
+    }
 }
