@@ -19,15 +19,22 @@
  * 
  */
 int main(int argc, char** argv) {
+    srand(time(NULL));
     int N = 24;
     generateData("./merijumi/diena1.csv", N);
     Merijums* merijumi = ielasitMerijumus("./merijumi/diena1.csv", N);
-    int sum = 0;
-    for (int i = 0; i < N; i++) {
-        sum += merijumi[i].t;
-        printf("Merijums %d = %d\n", merijumi[i].n, merijumi[i].t);
+    //int maks = max(merijumi, N);
+    printf("AVG : %f\n", avg(merijumi, N));
+    printf("MAX : %f\n", max(merijumi, N));
+    printf("MIN : %f\n", min(merijumi, N));
+
+    Merijums* dienasKurasMax;
+    int garums;
+    findEqualTo(merijumi, N, max(merijumi, N), &dienasKurasMax, &garums);
+    printf("Found : %d\n", garums);
+    for (int i = 0; i < garums; i++) {
+        printf("Merijums %d = %d\n", dienasKurasMax[i].n, dienasKurasMax[i].t);
     }
-    printf("Vid %f", sum / (double) N);
 
     return (EXIT_SUCCESS);
 }

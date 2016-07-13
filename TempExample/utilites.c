@@ -2,9 +2,14 @@
 
 #include "utilites.h"
 
+/**
+ * Generate n data records
+ * @param filename
+ * @param n
+ */
 void generateData(char* filename, int n) {
     FILE* fp;
-    fp = fopen(filename, "a");
+    fp = fopen(filename, "w");
     for (int i = 0; i < n; i++) {
         int t = rand() % 90 + 10;
         fprintf(fp, "%d;%d\n", i + 1, t);
@@ -26,4 +31,51 @@ Merijums * ielasitMerijumus(char* filename, int n) {
     fclose(fp);
 
     return merijumi;
+}
+
+double avg(Merijums* merijumi, int n) {
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += merijumi[i].t;
+    }
+    return sum / (double) n;
+}
+
+double max(Merijums* merijumi, int n) {
+    double max = merijumi[0].t;
+    for (int i = 1; i < n; i++) {
+        if (merijumi[i].t > max) {
+            max = merijumi[i].t;
+        }
+    }
+    return max;
+}
+
+double min(Merijums* merijumi, int n) {
+    double min = merijumi[0].t;
+    for (int i = 1; i < n; i++) {
+        if (merijumi[i].t < min) {
+            min = merijumi[i].t;
+        }
+    }
+    return min;
+}
+
+void findEqualTo(Merijums* merijumi, int n, double t, Merijums** atrastie, int* garums) {
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (merijumi[i].t == t) {
+            count++;
+        }
+    }
+    *garums = count;
+    Merijums* result = malloc(count * sizeof (Merijums));
+    count = 0;
+    for (int i = 0; i < n; i++) {
+        if (merijumi[i].t == t) {
+            result[count++] = merijumi[i];
+        }
+    }
+    *atrastie = result;
+    printf("end");
 }
