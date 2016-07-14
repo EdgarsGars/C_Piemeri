@@ -69,6 +69,7 @@ void findEqualTo(Merijums* merijumi, int n, double t, Merijums** atrastie, int* 
         }
     }
     *garums = count;
+
     Merijums* result = malloc(count * sizeof (Merijums));
     count = 0;
     for (int i = 0; i < n; i++) {
@@ -77,5 +78,68 @@ void findEqualTo(Merijums* merijumi, int n, double t, Merijums** atrastie, int* 
         }
     }
     *atrastie = result;
-    printf("end");
+
+}
+
+void lessThan(Merijums* merijumi, int n, double t, Merijums** atrastie, int* garums) {
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (merijumi[i].t < t) {
+            count++;
+        }
+    }
+    *garums = count;
+
+    Merijums* result = malloc(count * sizeof (Merijums));
+    count = 0;
+    for (int i = 0; i < n; i++) {
+        if (merijumi[i].t < t) {
+            result[count++] = merijumi[i];
+        }
+    }
+    *atrastie = result;
+}
+
+void greaterThan(Merijums* merijumi, int n, double t, Merijums** atrastie, int* garums) {
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (merijumi[i].t > t) {
+            count++;
+        }
+    }
+    *garums = count;
+
+    Merijums* result = malloc(count * sizeof (Merijums));
+    count = 0;
+    for (int i = 0; i < n; i++) {
+        if (merijumi[i].t > t) {
+            result[count++] = merijumi[i];
+        }
+    }
+    *atrastie = result;
+}
+
+void between(Merijums* merijumi, int n, double t0, double t1, Merijums** atrastie, int* garums) {
+    int count = 0;
+    for (int i = 0; i < n; i++) {
+        if (merijumi[i].t > t0 && merijumi[i].t < t1) {
+            count++;
+        }
+    }
+    *garums = count;
+
+    Merijums* result = malloc(count * sizeof (Merijums));
+    count = 0;
+    for (int i = 0; i < n; i++) {
+        if (merijumi[i].t > t0 && merijumi[i].t < t1) {
+            result[count++] = merijumi[i];
+        }
+    }
+    *atrastie = result;
+}
+
+void printResults(Merijums* merijumi, int n) {
+    for (int i = 0; i < n; i++) {
+        printf("Merijums %d = %d\n", merijumi[i].n, merijumi[i].t);
+    }
 }
